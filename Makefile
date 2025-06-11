@@ -6,30 +6,36 @@
 # define the compiler to use
 CC=gcc 
 # define the name of the executable
-TARGET=runme 
+TARGET=execuatable 
 # list source files
-SOURCES=main.c functions.c
+# SOURCES=main.c functions.c
+SOURCES=$(patsubst %.c, %.o, $(wildcard src/*.c))
+INCLUDES = -I./include
+
 # add some flags
 CFLAGS=-O3
 LFLAGS=-lm
 
-################################################################################
-### DO NOT EDIT THE FOLLOWING LINES ############################################
-################################################################################
 
-# define list of objects
-OBJSC=$(SOURCES:.c=.o)
-OBJS=$(OBJSC:.cpp=.o)
+default: $(TARGET)
+all: default
 
-# the target is obtained linking all .o files
-all: $(SOURCES) $(TARGET)
 
-$(TARGET): $(OBJS)
-	$(CC) $(LFLAGS) $(OBJS) -o $(TARGET)
+# when call make first of all below section is called to genrate object file
+# Make object code
+%.o: %.c $(HEADERS)
+	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@
+
+# then link them to create binary executable
+# Make binary
+$(TARGET): $(SOURCES)
+	$(CC) $(SOURCES) -Wall $(LIBS) -o $@
+
 
 # remove binray executable file
 purge: clean
 	rm -f $(TARGET)
+	rm -rf src/*.o
 
 # remove object files
 clean:

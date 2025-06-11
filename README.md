@@ -12,5 +12,15 @@ This `Makefile` assumes that all source files (.c or .cpp) are in the same direc
 4. To run executabe type, `make run`
 5. Use `make clean` and `make purge` to remove generated files and make project directory clean.
 
+TODO
+
+gitignore
+https://github.com/github/gitignore/blob/main/C.gitignore
+
+separate directory
+
+https://www.cs.swarthmore.edu/~newhall/unixhelp/howto_makefiles.html
+
+https://gitlab.com/esmaeelE/pastebin-server
 
 
